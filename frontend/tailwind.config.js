@@ -8,7 +8,8 @@ export default {
     extend: {
       backgroundColor:{
         'light-secondary':'#f5f5f5',
-        'theme':'#17bdd3'
+        'theme-500':'#17bdd3',
+        'theme-600':'#118fa0'
       }
     },
   },

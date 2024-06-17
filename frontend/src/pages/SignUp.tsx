@@ -7,25 +7,56 @@ import { LuEyeOff } from "react-icons/lu";
 import { useState } from "react";
 import Button from "@/ui/Button";
 import { Link } from "react-router-dom";
+type User = {
+  username: string;
+  email: string;
+  password: string;
+};
 const SignUp = () => {
   const [visible, setVisible] = useState(false);
+  const [userInfo, setUserInfo] = useState<User>({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name as "username" | "email" | "password";
+    const value = e.target.value as string;
+    setUserInfo((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
   return (
     <div className="mt-10 flex w-full items-center justify-center">
-      <div className="bg-light-secondary grid grid-cols-2 rounded-xl">
+      <div className="grid grid-cols-2 rounded-xl bg-light-secondary">
         <img src="/authImage.png" alt="authimage" className="w-auto max-w-72" />
-        <div className="flex w-72 flex-col items-center gap-8 px-10 pt-8">
+        <div className="flex w-72 flex-col items-center gap-10 px-9 pt-6">
           <div className="text-3xl font-bold">Register</div>
           <div className="flex flex-col items-start gap-3">
-            <Input type="text" label="Username" className="">
+            <Input
+              value={userInfo.username}
+              type="text"
+              name="username"
+              label="Username"
+              onChange={handleChange}
+            >
               <RiUserLine className="absolute left-2 top-2" />
             </Input>
-            <Input type="email" label="Email" className="">
+            <Input
+              type="email"
+              name="email"
+              value={userInfo.email}
+              label="Email"
+              onChange={handleChange}
+            >
               <FiMail className="absolute left-2 top-2" />
             </Input>
             <Input
               type={`${visible ? "text" : "password"}`}
+              name="password"
               label="Password"
-              className=""
+              value={userInfo.password}
+              onChange={handleChange}
             >
               <MdLockOutline className="absolute left-2 top-2" />
               {visible ? (
