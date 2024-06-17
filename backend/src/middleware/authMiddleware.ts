@@ -12,8 +12,8 @@ export const authMiddleware = (
     if (!tokenHeader || !tokenHeader.startsWith("Bearer"))
       throw new Error("Unauthorized, invalid token");
     const token = tokenHeader.split(" ")[1];
-    const decodedToken = jwt.verify(token, SECRET) as { email: string };
-    req.headers.email = decodedToken.email;
+    const decodedToken = jwt.verify(token, SECRET) as { userId: string };
+    req.headers.userId = decodedToken.userId;
     next();
   } catch (error: any) {
     return res.status(403).json({ msg: error.message });
