@@ -8,7 +8,7 @@ const Button = ({ children, className, ...props }: ButtonProps) => {
     <button
       {...props}
       className={cn(
-        "bg-theme-500 hover:bg-theme-600 w-full rounded-full py-2 font-medium text-white transition-all duration-300 hover:scale-105",
+        "w-full rounded-full bg-theme-500 py-2 font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-theme-600",
         className,
       )}
     >

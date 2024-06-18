@@ -8,11 +8,13 @@ const router = Router();
 
 router.post("/signup", async (req: Request, res: Response) => {
   try {
-    const payload:authBody = req.body;
+    const payload: authBody = req.body;
     const parsedPayload = authhValidation.safeParse(payload);
     if (!parsedPayload.success) throw new Error("invalid inputs");
 
-    const alreadyExist = await User.findOne({ email: parsedPayload.data.email });
+    const alreadyExist = await User.findOne({
+      email: parsedPayload.data.email,
+    });
     if (alreadyExist) throw new Error("Email already taken");
 
     const passHash = await generateHash(parsedPayload.data.password);
@@ -30,7 +32,7 @@ router.post("/signup", async (req: Request, res: Response) => {
 
 router.post("/signin", async (req: Request, res: Response) => {
   try {
-    const payload:authBody = req.body;
+    const payload: authBody = req.body;
     const parsedPayload = authhValidation.safeParse(payload);
     if (!parsedPayload.success) throw new Error("invalid inputs");
 
@@ -39,7 +41,7 @@ router.post("/signin", async (req: Request, res: Response) => {
 
     const isValid = await validateHash(
       parsedPayload.data.password,
-      user.password
+      user.password,
     );
     if (!isValid) return res.status(403).json({ msg: "invalid password" });
     const token = jwt.sign({ userId: user._id }, SECRET);

@@ -13,9 +13,13 @@ const Input = ({ children, label, className, ...props }: InputProps) => {
         {children}
         <input
           {...props}
-          className={cn("w-full rounded-2xl py-1 text-gray-600 focus:outline-gray-500 focus:outline-2", className, {
-            "px-8": children,
-          })}
+          className={cn(
+            "w-full rounded-2xl py-1 text-gray-600 focus:outline-2 focus:outline-gray-500",
+            className,
+            {
+              "px-8": children,
+            },
+          )}
         />
       </div>
     </div>

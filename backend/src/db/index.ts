@@ -22,7 +22,7 @@ export const generateHash = async (password: string) => {
 
 export const validateHash = async (
   candidatePassword: string,
-  hashedPassword: string
+  hashedPassword: string,
 ) => {
   return await bcrypt.compare(candidatePassword, hashedPassword);
 };
